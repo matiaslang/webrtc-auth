@@ -1,0 +1,11 @@
+FROM node:9-alpine
+
+WORKDIR /usr/src
+
+# Copy project definition files
+COPY package*.json ./
+
+# Install packages
+RUN npm install
+
+COPY . .

@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  auth-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src
+    depends_on:
+      - auth-db
+    environment:
+      NODE_ENV: development
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+  auth-db:
+    image: postgres
+    volumes:
+      - auth-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+volumes:
+  auth-data:
+    external: true

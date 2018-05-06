@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "prestart": "node_modules/.bin/sequelize db:migrate  --config config/index.js && node_modules/.bin/sequelize db:seed:all  --config config/index.js",
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -11,6 +12,13 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11"
+    "pg": "^7.4.2",
+    "pg-hstore": "^2.3.2",
+    "pug": "2.0.0-beta11",
+    "sequelize": "^4.37.6",
+    "sequelize-cli": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
   }
 }
